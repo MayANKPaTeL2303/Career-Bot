@@ -1,25 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Career Guidance Chatbot</title>
-    <style>
-        textarea { width: 100%; height: 120px; }
-        .chatbox { margin-top: 20px; border: 1px solid #ddd; padding: 10px; background-color: #f9f9f9; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to static CSS -->
+    <link rel="stylesheet" href="{% static 'careerbot/style.css' %}">
 </head>
 <body>
-    <h1>🎯 Career Guidance Chatbot</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <textarea name="user_input" placeholder="Describe your skills, interests, and education...">{{ user_input|default_if_none:"" }}</textarea><br>
-        <button type="submit">Get Career Advice</button>
-    </form>
+    <div class="container">
+        <h1>🎯 Career Guidance Chatbot</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <textarea name="user_input" placeholder="Describe your skills, interests, and education...">{{ user_input|default_if_none:"" }}</textarea>
+            <button type="submit">Get Career Advice</button>
+        </form>
 
-    {% if suggestion %}
+        {% if suggestion %}
         <div class="chatbox">
             <h3>📌 Suggested Careers</h3>
             <div style="white-space: pre-wrap;">{{ suggestion|safe }}</div>
         </div>
-    {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        💡 Powered by Google Gemini · Built with Django · Made with ❤️ by Mayank
+    </div>
 </body>
 </html>
