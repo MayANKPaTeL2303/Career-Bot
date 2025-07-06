@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.so
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables
+.env
+
+# VS Code settings
+.vscode/
+
+# MacOS & Linux junk
+.DS_Store
+*.swp
+*.swo
+
+# Byte-compiled files
+*.pyc
+
+# Logs and local database
+*.log
+*.sqlite3
+
+# Django cache
+*.pot
+*.pyc
+*.pyo
+*.db
+*.mo
+*.log
+*.pot
+*.py~
+db.sqlite3
+
+# Static & media (if generated locally)
+staticfiles/
+media/
+
+# Migrations (optional – useful for generated-only migrations)
+**/migrations/*.pyc
+**/migrations/__pycache__/
