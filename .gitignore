@@ -48,3 +48,5 @@ media/
 # Migrations (optional – useful for generated-only migrations)
 **/migrations/*.pyc
 **/migrations/__pycache__/
+
+ideas.txt

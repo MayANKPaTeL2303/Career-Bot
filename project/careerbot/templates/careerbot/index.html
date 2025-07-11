@@ -1,33 +1,18 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Career Guidance Chatbot</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
 
-    <!-- Link to static CSS -->
-    <link rel="stylesheet" href="{% static 'careerbot/style.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>🎯 Career Guidance Chatbot</h1>
-        <form method="POST">
-            {% csrf_token %}
-            <textarea name="user_input" placeholder="Describe your skills, interests, and education...">{{ user_input|default_if_none:"" }}</textarea>
-            <button type="submit">Get Career Advice</button>
-        </form>
+{% block title %}Home | Career Navigator{% endblock %}
 
-        {% if suggestion %}
-        <div class="chatbox">
-            <h3>📌 Suggested Careers</h3>
-            <div style="white-space: pre-wrap;">{{ suggestion|safe }}</div>
-        </div>
-        {% endif %}
-    </div>
+{% block content %}
+<form method="POST" class="form-box">
+    {% csrf_token %}
+    <textarea name="user_input" class="input-textarea" placeholder="Describe your skills, interests, and education...">{{ user_input|default_if_none:"" }}</textarea>
+    <button type="submit" class="submit-btn">Get Career Options</button>
+</form>
 
-    <div class="footer">
-        💡 Powered by Google Gemini · Built with Django · Made with ❤️ by Mayank
-    </div>
-</body>
-</html>
+{% if suggestion %}
+<div class="chatbox">
+    <h3 class="suggestion-title">📌 Suggested Careers</h3>
+    <div class="suggestion-output">{{ suggestion|safe }}</div>
+</div>
+{% endif %}
+{% endblock %}
