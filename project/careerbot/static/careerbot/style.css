@@ -13,7 +13,7 @@ body {
 /* Layout Containers */
 /*------------------*/
 .container {
-    max-width: 700px;
+    max-width: 900px;
     margin: 50px auto;
     padding: 30px;
     background-color: #ffffff;
@@ -185,12 +185,25 @@ body {
 /* Cards Grid Layout */
 /*------------------*/
 .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 0 1rem;
-    margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* ✅ Exactly 3 cards per row */
+  gap: 2rem;
+  padding: 0 1rem;
+  margin-bottom: 3rem;
 }
+
+@media (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .card-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 
 /*------------------*/
 /* Card Component    */

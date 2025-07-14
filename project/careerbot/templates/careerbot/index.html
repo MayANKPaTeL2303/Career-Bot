@@ -3,7 +3,7 @@
 {% block title %}Home | Career Navigator{% endblock %}
 
 {% block content %}
-<form method="POST" class="form-box">
+<form method="POST" class="form-box" id="career-form">
     {% csrf_token %}
     <textarea name="user_input" class="input-textarea" placeholder="Describe your skills, interests, and education...">{{ user_input|default_if_none:"" }}</textarea>
     <button type="submit" class="submit-btn">Get Career Options</button>
@@ -13,6 +13,18 @@
 <div class="chatbox">
     <h3 class="suggestion-title">📌 Suggested Careers</h3>
     <div class="suggestion-output">{{ suggestion|safe }}</div>
+</div>
+{% endif %}
+
+{% if api_failed %}
+<div class="chatbox" style="border-left-color: #ef4444; background-color: #fef2f2;">
+    <h3 class="suggestion-title" style="color: #b91c1c;">⚠️ Gemini API Error</h3>
+    <p class="suggestion-output">We couldn't get results from Gemini right now. Please try again.</p>
+    <form method="POST" id="retry-form" style="margin-top: 15px;">
+        {% csrf_token %}
+        <input type="hidden" name="user_input" value="{{ user_input }}">
+        <button type="submit" class="submit-btn" style="background-color: #f87171;">🔄 Retry with Same Prompt</button>
+    </form>
 </div>
 {% endif %}
 {% endblock %}

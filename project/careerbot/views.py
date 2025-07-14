@@ -3,6 +3,7 @@ import requests
 from django.shortcuts import render
 from dotenv import load_dotenv
 import markdown # type: ignore
+from requests.exceptions import RequestException
 import bleach
 
 # Load environment variables from .env
@@ -97,15 +98,26 @@ def resources(request):
 def index(request):
     suggestion = None
     user_input = ""
+    api_failed = False
+    error_message = None
 
     if request.method == "POST":
         user_input = request.POST.get("user_input", "").strip()
-        if user_input:
-            suggestion = get_career_guidance(user_input)
+
+        if not user_input:
+            error_message = "⚠️ Input cannot be empty. Please describe your profile."
         else:
-            suggestion = "⚠️ Input cannot be empty. Please describe your profile."
+            try:
+                # Attempt Gemini API call
+                suggestion = get_career_guidance(user_input)
+            except RequestException:
+                # Handles network or Gemini 503/500 failure
+                api_failed = True
+                suggestion = None
 
     return render(request, "careerbot/index.html", {
         "suggestion": suggestion,
-        "user_input": user_input
+        "user_input": user_input,
+        "api_failed": api_failed,
+        "error_message": error_message
     })
